@@ -7,7 +7,7 @@
 
 class yx5300{
  public:
-    yx5300(int rx, int tx);
+    yx5300(unsigned int rx, unsigned int tx);
     //yx5300(Stream s);
     int play();
     int pause();
@@ -17,6 +17,7 @@ class yx5300{
     int volume_down();
     int set_volume(int8_t volume);
  private:
+    void startup();
     int executeCommand(int8_t command, int8_t arg1 = 0, int8_t arg2 = 0);
     void sendCommand(int8_t command, int8_t arg1, int8_t arg2);
     void receiveAnswer();

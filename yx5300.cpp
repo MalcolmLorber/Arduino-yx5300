@@ -1,6 +1,6 @@
 #include "yx5300.h"
 #include "yx5300_defines.h"
-yx5300::yx5300(int rx, int tx){
+yx5300::yx5300(unsigned int rx, unsigned int tx){
     mp3_stream = SoftwareSerial(rx, tx);
 }
 //yx5300::yx5300(Stream s){
@@ -26,6 +26,12 @@ int yx5300::volume_down(){
 }
 int yx5300::set_volume(int8_t volume){
     return executeCommand(CMD_SET_VOLUME, 0, volume);
+}
+
+void yx5300::startup()
+{
+    mp3_stream.begin(9600);
+    executeCommand(CMD_SEL_DEV, 0, 0x02);
 }
 
 int yx5300::executeCommand(int8_t command, int8_t arg1 = 0, itn8_t arg2 =0)
