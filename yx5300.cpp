@@ -1,12 +1,14 @@
 #include "yx5300.h"
-
+#include "yx5300_defines.h"
 yx5300::yx5300(int rx, int tx){
     mp3_stream = SoftwareSerial(rx, tx);
 }
 yx5300::yx5300(Stream s){
     mp3_stream = s;
 }
-int yx5300::play();
+int yx5300::play(){
+    
+}
 int yx5300::pause();
 int yx5300::next();
 int yx5300::prev();
@@ -15,14 +17,14 @@ int yx5300::volume_down();
 int yx5300::set_volume(int volume);
 void yx5300::sendCommand(int8_t command, int16_t arguments){
     delay(5);
-    send_buffer[0] = 0x7e;   //
-    send_buffer[1] = 0xff;   //
-    send_buffer[2] = 0x06;   // Len
-    send_buffer[3] = command;//
+    send_buffer[0] = 0x7e;   // Starting byte, always 7E
+    send_buffer[1] = 0xff;   // second byte, always FF
+    send_buffer[2] = 0x06;   // Length of command
+    send_buffer[3] = command;// command byte
     send_buffer[4] = 0x01;   // 0x00 NO, 0x01 feedback
-    send_buffer[5] = (int8_t)(arguments >> 8);  //datah
-    send_buffer[6] = (int8_t)(arguments);       //datal
-    send_buffer[7] = 0xef; //
+    send_buffer[5] = (int8_t)(arguments >> 8);  //high argument data
+    send_buffer[6] = (int8_t)(arguments);       //low argument data
+    send_buffer[7] = 0xef; // ending byte is always EF
     for(uint8_t i = 0; i<8; i++){
 	mp3_stream.write(send_buffer[i]);
     }

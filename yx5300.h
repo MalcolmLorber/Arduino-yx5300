@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
+
 class yx5300{
  public:
     yx5300(int rx, int tx);
