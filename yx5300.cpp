@@ -1,7 +1,7 @@
 #include "yx5300.h"
 #include "yx5300_defines.h"
-yx5300::yx5300(unsigned int rx, unsigned int tx){
-    mp3_stream = SoftwareSerial(rx, tx);
+yx5300::yx5300(int rx, int tx): mp3_stream(rx,tx){
+    //mp3_stream = SoftwareSerial(rx, tx);
 }
 //yx5300::yx5300(Stream s){
 //    mp3_stream = s;
@@ -34,7 +34,7 @@ void yx5300::startup()
     executeCommand(CMD_SEL_DEV, 0, 0x02);
 }
 
-int yx5300::executeCommand(int8_t command, int8_t arg1 = 0, itn8_t arg2 =0)
+int yx5300::executeCommand(int8_t command, int8_t arg1, int8_t arg2)
 {
     //send the command, receive an answer
     sendCommand(command, arg1, arg2);

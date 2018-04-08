@@ -7,7 +7,7 @@
 
 class yx5300{
  public:
-    yx5300(unsigned int rx, unsigned int tx);
+    yx5300(int rx, int tx);
     //yx5300(Stream s);
     int play();
     int pause();
