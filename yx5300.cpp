@@ -7,14 +7,32 @@ yx5300::yx5300(Stream s){
     mp3_stream = s;
 }
 int yx5300::play(){
-    
+    return executeCommand(CMD_PLAY, 0);
 }
-int yx5300::pause();
-int yx5300::next();
-int yx5300::prev();
-int yx5300::volume_up();
-int yx5300::volume_down();
-int yx5300::set_volume(int volume);
+int yx5300::pause(){
+     return executeCommand(CMD_PAUSE, 0);
+}
+int yx5300::next(){
+     return executeCommand(CMD_NEXT_SONG, 0);
+}
+int yx5300::prev(){
+     return executeCommand(CMD_NEXT_SONG, 0);
+}
+int yx5300::volume_up(){
+     return executeCommand(CMD_NEXT_SONG, 0);
+}
+int yx5300::volume_down(){
+     return executeCommand(CMD_NEXT_SONG, 0);
+}
+int yx5300::set_volume(int8_t volume){
+     return executeCommand(CMD_SET_VOLUME, volume);
+}
+
+int yx5300::executeCommand(int8t_command, int16t_arguments)
+{
+
+}
+
 void yx5300::sendCommand(int8_t command, int16_t arguments){
     delay(5);
     send_buffer[0] = 0x7e;   // Starting byte, always 7E
