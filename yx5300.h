@@ -8,7 +8,7 @@
 class yx5300{
  public:
     yx5300(int rx, int tx);
-    yx5300(Stream s);
+    //yx5300(Stream s);
     int play();
     int pause();
     int next();
@@ -17,10 +17,10 @@ class yx5300{
     int volume_down();
     int set_volume(int8_t volume);
  private:
-    int executeCommand(int8_t command, int8_t arg1 = 0, in8_t arg2 = 0);
+    int executeCommand(int8_t command, int8_t arg1 = 0, int8_t arg2 = 0);
     void sendCommand(int8_t command, int8_t arg1, int8_t arg2);
     void receiveAnswer();
-    Serial mp3_stream;
+    SoftwareSerial mp3_stream;
     int8_t send_buffer[8];
     uint8_t reply_buffer[10];
 };

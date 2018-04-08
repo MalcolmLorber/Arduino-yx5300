@@ -3,9 +3,9 @@
 yx5300::yx5300(int rx, int tx){
     mp3_stream = SoftwareSerial(rx, tx);
 }
-yx5300::yx5300(Stream s){
-    mp3_stream = s;
-}
+//yx5300::yx5300(Stream s){
+//    mp3_stream = s;
+//}
 int yx5300::play(){
     return executeCommand(CMD_PLAY);
 }
@@ -30,7 +30,10 @@ int yx5300::set_volume(int8_t volume){
 
 int yx5300::executeCommand(int8_t command, int8_t arg1 = 0, itn8_t arg2 =0)
 {
-
+    //send the command, receive an answer
+    sendCommand(command, arg1, arg2);
+    receiveAnswer();
+    //parse the answer to check for errors and status
 }
 
 void yx5300::sendCommand(int8_t command, int8_t arg1, int8_t arg2){
