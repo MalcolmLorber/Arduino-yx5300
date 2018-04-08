@@ -7,41 +7,41 @@ yx5300::yx5300(Stream s){
     mp3_stream = s;
 }
 int yx5300::play(){
-    return executeCommand(CMD_PLAY, 0);
+    return executeCommand(CMD_PLAY);
 }
 int yx5300::pause(){
-     return executeCommand(CMD_PAUSE, 0);
+    return executeCommand(CMD_PAUSE);
 }
 int yx5300::next(){
-     return executeCommand(CMD_NEXT_SONG, 0);
+    return executeCommand(CMD_NEXT_SONG);
 }
 int yx5300::prev(){
-     return executeCommand(CMD_NEXT_SONG, 0);
+    return executeCommand(CMD_PREV_SONG);
 }
 int yx5300::volume_up(){
-     return executeCommand(CMD_NEXT_SONG, 0);
+    return executeCommand(CMD_VOLUME_UP);
 }
 int yx5300::volume_down(){
-     return executeCommand(CMD_NEXT_SONG, 0);
+    return executeCommand(CMD_VOLUME_DOWN);
 }
 int yx5300::set_volume(int8_t volume){
-     return executeCommand(CMD_SET_VOLUME, volume);
+    return executeCommand(CMD_SET_VOLUME, 0, volume);
 }
 
-int yx5300::executeCommand(int8t_command, int16t_arguments)
+int yx5300::executeCommand(int8_t command, int8_t arg1 = 0, itn8_t arg2 =0)
 {
 
 }
 
-void yx5300::sendCommand(int8_t command, int16_t arguments){
+void yx5300::sendCommand(int8_t command, int8_t arg1, int8_t arg2){
     delay(5);
     send_buffer[0] = 0x7e;   // Starting byte, always 7E
     send_buffer[1] = 0xff;   // second byte, always FF
     send_buffer[2] = 0x06;   // Length of command
     send_buffer[3] = command;// command byte
     send_buffer[4] = 0x01;   // 0x00 NO, 0x01 feedback
-    send_buffer[5] = (int8_t)(arguments >> 8);  //high argument data
-    send_buffer[6] = (int8_t)(arguments);       //low argument data
+    send_buffer[5] = arg1;  //arg1 byte
+    send_buffer[6] = arg2;  //arg2 byte
     send_buffer[7] = 0xef; // ending byte is always EF
     for(uint8_t i = 0; i<8; i++){
 	mp3_stream.write(send_buffer[i]);
