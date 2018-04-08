@@ -6,10 +6,12 @@ yx5300::yx5300(int rx, int tx){
 yx5300::yx5300(Stream s){
 	mp3_stream = s;
 }
-yx5300::int play();
-yx5300::int pause();
-yx5300::int next();
-yx5300::int prev();
-yx5300::int volume_up();
-yx5300::int volume_down();
-yx5300::int set_volume(int volume);
+int yx5300::play();
+int yx5300::pause();
+int yx5300::next();
+int yx5300::prev();
+int yx5300::volume_up();
+int yx5300::volume_down();
+int yx5300::set_volume(int volume);
+void yx5300::sendCommand(int8_t command, int16_t arguments);
+String yx5300::receiveAnswer();

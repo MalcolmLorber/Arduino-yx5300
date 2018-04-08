@@ -16,9 +16,11 @@ class yx5300{
 		int volume_down();
 		int set_volume(int volume);
 	private:
+		void sendCommand(int8_t command, int16_t arguments);
+		String receiveAnswer();
 		Serial mp3_stream;
-		int8_t send_buffer;
-		uint8_t reply_buffer;
+		int8_t send_buffer[8];
+		uint8_t reply_buffer[10];
 };
 
 #endif
