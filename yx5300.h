@@ -8,10 +8,10 @@
 class yx5300{
  public:
     yx5300(int rx, int tx);
-    yx5300();
     void startup();
     //yx5300(Stream s);
     int play();
+    int play(uint8_t track_number);
     int pause();
     int next();
     int prev();

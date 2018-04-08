@@ -9,6 +9,9 @@ yx5300::yx5300(int rx, int tx): mp3_stream(rx,tx){
 int yx5300::play(){
     return executeCommand(CMD_PLAY);
 }
+int yx5300::play(uint8_t track_number){
+    return executeCommand(CMD_PLAY_W_INDEX, 0, track_number);
+}
 int yx5300::pause(){
     return executeCommand(CMD_PAUSE);
 }
@@ -31,7 +34,9 @@ int yx5300::set_volume(int8_t volume){
 void yx5300::startup()
 {
     mp3_stream.begin(9600);
-    delay(500);
+    delay(100);
+    sendCommand(CMD_RESET, 0, 0);
+    delay(100);
     sendCommand(CMD_SEL_DEV, 0, 0x02);
     delay(500);
 }
